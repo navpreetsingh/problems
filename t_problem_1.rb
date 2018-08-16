@@ -1,11 +1,15 @@
 =begin
-    Result: {
-        a: {
-                b: [[a],[c],[a,h],[4,-1,19]],
-                c: []        
-            }
-    }
+There is a popular saying that goes: "The friends of my friends are my friends". 
+
+A friendship is represented in the form "PersonA:PersonB", which means that PersonA and PersonB are friends. Given two such relations, for example, "PersonA:PersonB" and "PersonB:PersonC", and taking the saying into account means that PersonA is friends with PersonB and PersonC, PersonB is friends with PersonA and PersonC and PersonC is friends with PersonA and PersonB.
+
+Now, write a function that, given an array of such relations as the first parameter, calculates the total number of friends for the array of people given as the second parameter.
+
+Examples:
+numberOfFriends(["Anne:Barbara","Barbara:Ivan", "Vinny:Vlad"], ["Anne", "Vinny"]) // Anne:2, Vinny: 1
+numberOfFriends(["Octavia:Zoltan", "Zoltan:Marko", "Marko:Diego", "Diego:Andres"], ["Octavia", "Diego"]) // Octavia: 4, Diego: 4
 =end
+
 require 'byebug'
 
 class ShortestPath
@@ -97,7 +101,7 @@ class ShortestPath
         end
         # distance_counter.shift
         puts "\nCounter for point #{@key}: \n#{@distance_counter}"
-        puts "\nDistance Points #{@key}: \n#{@distance_points}"
+        puts "\nDistance index from #{@key}: \n#{@distance_points}"
         return 1
     end
 
@@ -109,100 +113,50 @@ class ShortestPath
             points = @distance_counter[range1-1,range2-1].sum
             puts "\nYou can reach #{@points.sum} points from #{@key} in range #{@range1} - #{@range2}"
         end
+        return 1
     end
 end
 
-def solution(graph, direction_array = nil, distance_index=nil, range_array=nil)
-    keys = distance_index.map(&:to_sym) || graph.keys
+def solution(graph, start=nil, end_point=nil, arr = nil, range_array=[nil,nil])
+    keys = arr.map(&:to_sym) || graph.keys
+    result = nil
     keys.each do |k|
         puts "Key: #{k} \n"
         target = ShortestPath.new(k, graph)
         target.result
-        unless direction_array.nil?
+        unless start.nil? && end_point.nil?
             target.shortest_path_direction(start.to_sym, end_point.to_sym)
         end
         target.points_counter_at_specific_distance
         target.total_points_connected(nil, nil)
-    end
+        puts "\n"
+    end  
+    return result || 1      
 end
 
+arrays = [
+    [["Anne:Barbara","Barbara:Ivan", "Vinny:Vlad"], ["Anne", "Vinny"]],
+    [["Octavia:Zoltan", "Zoltan:Marko", "Marko:Diego", "Diego:Andres"], ["Octavia", "Diego"]],
+    [["Alessandro:Anna", "Anna:Anne", "Anne:Barbara", "Barbara:David", "David:Francis", "Francis:Eduardo", "Eduardo:Anna", "Eduardo:Alessandro", "Luis:Marko", "Joao:Vlad", "Vlad:Luka", "Luka:Nikola", "Nikola:Roman", "Vlad:Roman", "Vlad:Vinny", "Vinny:Roman", "Vlad:Andres", "Vinny:Ivan"], ["Barbara", "Joao"]],
+    [["Vanja:Sergio", "Sergio:Pedro", "Pedro:Martin", "Martin:Pablo", "Pablo:Sergio", "Jelena:Ivan", "Jelena:Alan", "Alan:Tomislav"],["Tomislav", "Martin"]],
+    [["Alvaro:Alex", "Roman:Nikola", "Octavia:Barbara", "Joao:Marko", "Luis:Vanja", "Gabriel:Gustavo", "Alan:Pablo", "Ivan:Andres", "Artem:Anne", "Martin:Alessandro", "Sebastian:Vinny", "Eduardo:Francis", "Zoltan:Vlad"], ["Zoltan", "Ivan"]]
+]
 
-# GRAPH 1
-graph_1 = {
-    a: {b: 4, h: 8},
-    b: {a: 4, c: 8, h: 11},
-    c: {b: 8, d: 7, f: 4, i: 2},
-    d: {c: 7, e: 9, f: 14},
-    e: {d: 9, f: 10},
-    f: {c: 4, d: 14, e: 10, g: 2},
-    g: {f: 2, h: 1, i: 6},
-    h: {a: 8, b: 11, g: 1, i: 7},
-    i: {c: 2, g: 6, h: 7} 
-}
-
-solution(graph_1,nil,nil)
-
-
-# GRAPH 2
-graph_2 = {
-    "1": [0, 4, 0, 0, 0, 0, 0, 8, 0],
-    "2": [4, 0, 8, 0, 0, 0, 0, 11, 0],
-    "3": [0, 8, 0, 7, 0, 4, 0, 0, 2],
-    "4": [0, 0, 7, 0, 9, 14, 0, 0, 0],
-    "5": [0, 0, 0, 9, 0, 10, 0, 0, 0],
-    "6": [0, 0, 4, 14, 10, 0, 2, 0, 0],
-    "7": [0, 0, 0, 0, 0, 2, 0, 1, 6],
-    "8": [8, 11, 0, 0, 0, 0, 1, 0, 7],
-    "9": [0, 0, 2, 0, 0, 0, 6, 7, 0]
-}
-
-# Cleaning Data
-new_graph_2 = {}
-graph_keys = graph_2.keys
-graph_2.each do |key, val|
-    if new_graph_2[key.to_sym].nil?
-        new_graph_2[key.to_sym] = {}
+arrays.each do |graph_4|
+    puts "Array: #{graph_4}\n"
+    new_graph_4 = {}
+    graph_4[0].each do |str| 
+        str = str.split(":")
+        if new_graph_4[str[0].to_sym].nil?
+            new_graph_4[str[0].to_sym] = {}
+        end
+        if new_graph_4[str[1].to_sym].nil?
+            new_graph_4[str[1].to_sym] = {}
+        end
+        new_graph_4[str[0].to_sym][str[1].to_sym] = 1
+        new_graph_4[str[1].to_sym][str[0].to_sym] = 1
     end
-    val.each_with_index do |v, index|
-        second_axis = (index+1).to_s.to_sym
-        new_graph_2[key.to_sym][second_axis] = v if v > 0
-    end
+    puts "\nNew Graph: #{new_graph_4}"
+    result = solution(new_graph_4,nil,nil, graph_4[1], nil)
+    puts "\nResult: #{result}\n\n"
 end
-puts "New Graph_2: #{new_graph_2}"
-solution(new_graph_2,nil,nil)
-
-# GRAPH 3
-graph_3 = [9,1,4,9,0,4,8,9,0,1]
-# Cleaning Data
-new_graph_3 = {}
-graph_3.each_with_index do |val,index|
-    capital = val.to_s.to_sym if val == index
-    if new_graph_3[index.to_s.to_sym].nil?
-        new_graph_3[index.to_s.to_sym] = {}
-    end
-    new_graph_3[index.to_s.to_sym][val.to_s.to_sym] = 1
-    if new_graph_3[val.to_s.to_sym].nil?
-        new_graph_3[val.to_s.to_sym] = {}
-    end
-    new_graph_3[val.to_s.to_sym][index.to_s.to_sym] = 1
-end  
-puts "New Graph_3: #{new_graph_3}"
-solution(new_graph_3,nil,nil)
-
-# GRAPH 4
-graph_4 = [["Anne:Barbara","Barbara:Ivan", "Vinny:Vlad"], ["Anne", "Vinny"]]
-new_graph_4 = {}
-graph_4[0].each do |str| 
-    str = str.split(":")
-    if new_graph_4[str[0].to_sym].nil?
-        new_graph_4[str[0].to_sym] = {}
-    end
-    if new_graph_4[str[1].to_sym].nil?
-        new_graph_4[str[1].to_sym] = {}
-    end
-    new_graph_4[str[0].to_sym][str[1].to_sym] = 1
-    new_graph_4[str[1].to_sym][str[0].to_sym] = 1
-end
-
-puts "\n\nNew Graph 4: #{new_graph_4} \n\n"
-solution(new_graph_4,nil,nil)
