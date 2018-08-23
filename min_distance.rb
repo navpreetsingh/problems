@@ -64,7 +64,7 @@ class ShortestPath
         return keys_to_evaluate
     end
 
-    def shortest_path_direction(start, end_point)
+    def find_direction(start, end_point)
         if (start == end_point)
             puts "\nPath: You are standing at same location"
         else
@@ -112,17 +112,17 @@ class ShortestPath
     end
 end
 
-def solution(graph, direction_array = nil, distance_index=nil, range_array=nil)
+def solution(graph, direction_array = nil, distance_index=nil, range_array=[nil,nil])
     keys = distance_index.map(&:to_sym) || graph.keys
     keys.each do |k|
         puts "Key: #{k} \n"
         target = ShortestPath.new(k, graph)
         target.result
         unless direction_array.nil?
-            target.shortest_path_direction(start.to_sym, end_point.to_sym)
+            target.find_direction(direction_array[0].to_sym, direction_array[1].to_sym)
         end
         target.points_counter_at_specific_distance
-        target.total_points_connected(nil, nil)
+        target.total_points_connected(range_array[0], range_array[1])
     end
 end
 
