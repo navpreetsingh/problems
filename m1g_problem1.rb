@@ -83,9 +83,10 @@ def solution1(a,k)
         dummy_output = output_keys.dup
         if (v <= k)
             if(output[v.to_s].nil?)
-                output[v.to_s] = [[v]]
+                output[v.to_s] = []
                 output_keys.push(v)
             end
+            output[v.to_s].push([v])
             # puts "Dummy Output: #{dummy_output}"
             # Loop 2
             time_loop_2 = Time.now
@@ -103,7 +104,7 @@ def solution1(a,k)
                     output[ok.to_s].each do |val|  
                         loop_3 += 1
                         unless val.include? v
-                            new_array = val.dup.push(v)
+                            new_array = val.dup.push(v).sort
                             # puts "New Array: #{new_array}"
                             # puts "Sum_1: #{summ}"
                             output[summ.to_s].push(new_array)
@@ -119,7 +120,7 @@ def solution1(a,k)
     end
     puts "Loop1: #{loop_1} \nLoop2: #{loop_2} \nLoop3: #{loop_3}"
     puts "Total_Time: #{Time.now - total_time}"
-    return output[k.to_s]
+    return output[k.to_s].nil? ? nil : output[k.to_s].uniq
 end
 
 
@@ -141,6 +142,7 @@ arrays = [
     [[5,2,8,1,7,9],19],
     [[5,2,8,1,7,9],20],
     [[5,2,8,1,7,9],21],
+    [[7, 15, 3, 10, 14, 3, 2, 15, 7, 16, 1, 1],17]
 ]
 
 arrays.each do |arr|
