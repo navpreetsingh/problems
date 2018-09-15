@@ -6,6 +6,7 @@
         nil
     ]
 =end
+http://tpcg.io/iNzrSe
 
 require 'byebug'
 
@@ -76,8 +77,10 @@ def solution(string)
             break if deletion == 0
         end
     end
+
     # To Know the Time Complexity of the Program
     # puts "Loop1: #{loop_1} \nLoop2: #{loop_2} \nLoop3: #{loop_3} \nLoop4: #{loop_4} \nIf1: #{if_1} \nIf2: #{if_2} \nUnless1: #{unless_1} \nUnless2: #{unless_2}"
+
     return string.join() || nil
 end
 
