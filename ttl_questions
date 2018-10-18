@@ -1,0 +1,48 @@
+Message from Pedro Teixeira: "Domino": We are given an S string, representing a domino tile chain. Each tile has an L-R format, where L and R are numbers from the 1..6 range. The tiles are separated by a comma. Some examples of a valid S chain are:
+
+1. "6-3"
+2. "4-3,5-1,2-2,1-3,4-4"
+3. "1-1,3-5,5-2,2-3,2-4"
+
+Devise a function that given an S string, returns the number of tiles in the longest matching group within S. A matching group is a set of tiles that match and that are subsequent in S. Domino tiles match, if the right side of a tile is the same as the left side of the following tile. "2-4,4-1" are matching tiles, but "5-2,1-6" are not.
+
+domino("1-1,3-5,5-2,2-3,2-4") // should return 3.
+"Domino": We are given an S string, representing a domino tile chain. Each tile has an L-R format, where L and R are numbers from the 1..6 range. The tiles are separated by a comma. Some examples of a valid S chain are:
+
+1. "6-3"
+2. "4-3,5-1,2-2,1-3,4-4"
+3. "1-1,3-5,5-2,2-3,2-4"
+
+Devise a function that given an S string, returns the number of tiles in the longest matching group within S. A matching group is a set of tiles that match and that are subsequent in S. Domino tiles match, if the right side of a tile is the same as the left side of the following tile. "2-4,4-1" are matching tiles, but "5-2,1-6" are not.
+
+domino("1-1,3-5,5-2,2-3,2-4") // should return 3.
+
+
+
+
+
+
+
+
+
+A precedence rule is given as "P>E", which means that letter "P" is followed directly by the letter "E". Write a function, given an array of precedence rules, that finds the word represented by the given rules.
+
+Note: Each represented word contains a set of unique characters, i.e. the word does not contain duplicate letters.
+
+Examples:
+findWord(["P>E","E>R","R>U"]) // PERU
+findWord(["I>N","A>I","P>A","S>P"]) // SPAIN
+Message from Pedro Teixeira: ===========
+Test cases:
+
+findWord(["U>N", "G>A", "R>Y", "H>U", "N>G", "A>R"]) // HUNGARY
+findWord(["I>F", "W>I", "S>W", "F>T"]) // SWIFT
+findWord(["R>T", "A>L", "P>O", "O>R", "G>A", "T>U", "U>G"]) // PORTUGAL
+findWord(["W>I", "R>L", "T>Z", "Z>E", "S>W", "E>R", "L>A", "A>N", "N>D", "I>T"]) // SWITZERLAND
+===========
+Test cases:
+
+findWord(["U>N", "G>A", "R>Y", "H>U", "N>G", "A>R"]) // HUNGARY
+findWord(["I>F", "W>I", "S>W", "F>T"]) // SWIFT
+findWord(["R>T", "A>L", "P>O", "O>R", "G>A", "T>U", "U>G"]) // PORTUGAL
+findWord(["W>I", "R>L", "T>Z", "Z>E", "S>W", "E>R", "L>A", "A>N", "N>D", "I>T"]) // SWITZERLAND
