@@ -1,0 +1,90 @@
+ # See logs of container
+docker container ls
+docker logs --tail 100 7914a794e055
+docker logs -f --since=5s d66134ee3ce1
+
+docker images
+
+
+# Log into docker
+docker exec -it f486025d419e bash
+
+docker restart f486025d419e
+
+
+
+
+9b6b38d5c341        energy_monitoring:0.0.1 
+
+f486025d419e        iot_databank:0.0.1
+
+7914a794e055        user_management:0.0.1   
+
+d66134ee3ce1        mqtt_server:0.0.1 
+
+de7df8611701        api_dev:1.0  
+
+2e26f7389d0a        cyrilix/rabbitmq-mqtt:latest 
+
+ssh -i production_ubuntu.pem ubuntu@35.188.138.120
+
+
+ssh -i google_stage_server.pem ubuntu@35.224.215.163
+
+
+
+{{mqtt_api_url}}/api/mqtts
+
+mqtt.psyphy.ai/api/mqtts
+
+
+mongodump -h 35.224.215.163 --port 27019  -d UserManagementDB --username usrMgmtAdmin --password TGAdmin@321
+
+mongorestore -h 127.0.0.1 --port 27017  -d UserManagementDB --username admin --password TGAdmin@321 dump/UserManagementDB
+
+
+
+Bitbucket Master 
+Email Id :- development@untroddenlabs.com
+Password :- dev!!unt!!789bbkt
+
+Email
+Email Id :- development@untroddenlabs.com
+Password :- dev!!unt!!789
+
+Trello
+Email Id :- development@untroddenlabs.com
+Password :- dev!!unt!!789trello
+
+AWS account
+Username: devloper
+Password: Z!^N789GSDe[yB&@&@
+
+
+docker --help
+docker image ls -a
+docker container ls -a
+
+docker container run 
+--publish or -p port_on_system:port_of_docker 
+--detach or -d
+--name name_of_docker
+image_name
+
+docker container run -it name_of_container bash or sh or name_of_command_to_run
+docker container exec -it name_of_container bash or sh or name_of_command_to_run
+
+docker container top name_of_container
+docker container stats
+docker container inspect name_of_container
+
+docker container ls --filter status=exited --format '{{.Names}}'
+
+$ apt-get update
+$ apt-get install iputils-ping
+
+To Copy Data from Docker Container to Host
+sudo docker cp container_id:container_path ${PWD}/
+
+MOUNT THE PATH IN CONTAINER RATHER THAN IN IMAGE
+sudo docker container run -p 3000:3000 -d --name user_session -v ${PWD}/:/usr/src/app/ testrails
