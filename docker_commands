@@ -1,7 +1,7 @@
- # See logs of container
+# See logs of container
 docker container ls
 docker logs --tail 100 7914a794e055
-docker logs -f --since=5s d66134ee3ce1
+docker logs  d66134ee3ce1
 
 docker images
 
@@ -11,55 +11,7 @@ docker exec -it f486025d419e bash
 
 docker restart f486025d419e
 
-
-
-
-9b6b38d5c341        energy_monitoring:0.0.1 
-
-f486025d419e        iot_databank:0.0.1
-
-7914a794e055        user_management:0.0.1   
-
-d66134ee3ce1        mqtt_server:0.0.1 
-
-de7df8611701        api_dev:1.0  
-
-2e26f7389d0a        cyrilix/rabbitmq-mqtt:latest 
-
-ssh -i production_ubuntu.pem ubuntu@35.188.138.120
-
-
-ssh -i google_stage_server.pem ubuntu@35.224.215.163
-
-
-
-{{mqtt_api_url}}/api/mqtts
-
-mqtt.psyphy.ai/api/mqtts
-
-
-mongodump -h 35.224.215.163 --port 27019  -d UserManagementDB --username usrMgmtAdmin --password TGAdmin@321
-
-mongorestore -h 127.0.0.1 --port 27017  -d UserManagementDB --username admin --password TGAdmin@321 dump/UserManagementDB
-
-
-
-Bitbucket Master 
-Email Id :- development@untroddenlabs.com
-Password :- dev!!unt!!789bbkt
-
-Email
-Email Id :- development@untroddenlabs.com
-Password :- dev!!unt!!789
-
-Trello
-Email Id :- development@untroddenlabs.com
-Password :- dev!!unt!!789trello
-
-AWS account
-Username: devloper
-Password: Z!^N789GSDe[yB&@&@
-
+docker service logs -f --since=100s toptal-test_proxy 
 
 docker --help
 docker image ls -a
@@ -87,4 +39,29 @@ To Copy Data from Docker Container to Host
 sudo docker cp container_id:container_path ${PWD}/
 
 MOUNT THE PATH IN CONTAINER RATHER THAN IN IMAGE
-sudo docker container run -p 3000:3000 -d --name user_session -v ${PWD}/:/usr/src/app/ testrails
+sudo docker container run -p 3000:3000 -d --name user_session -v ${PWD}/:/usr/src/app/ testrails 
+
+Mount volume to same name and path if changing or updating databases
+docker container run --name  mysql_1 -d -p 3309:3306 -v mysql_db_path:/var/lib/mysql/ -e MYSQL_ROOT_PASSWORD=password mysql:5.7
+
+
+
+UPGRADE version in docker for minor updates
+just keep the volume same and attach it to new image
+
+DOCKER COMPOSE
+docker-compose up    in a folder
+
+Initiating Docker Swarm
+docker swarm init
+
+ Service in Docker (replaces docker run in swarm)
+docker service create name_of_image
+
+Update docker service with replicas and other things
+docker service update service_name --replicas 3
+
+
+
+
+sudo certbot --nginx -d www.sarbat-app.com -d sarbat-app.com -d www.toptal-angular.sarbat-app.com -d toptal-angular.sarbat-app.com -d www.toptal-rails.sarbat-app.com -d toptal-rails.sarbat-app.com -d www.toptal-nodejs.sarbat-app.com -d toptal-nodejs.sarbat-app.com -d www.toptal-python.sarbat-app.com -d toptal-python.sarbat-app.com

@@ -2,17 +2,18 @@ require 'byebug'
 
 def solution(arr)
     arr = arr.split("")
-    # puts "Array: #{arr}" 
+    puts "Array: #{arr}" 
     arr.each_with_index do |a,index|
         element = Integer(a) rescue nil
+        puts "Element: #{element}"
         unless element
             # byebug
             new_arr = arr.slice(index, 3)
-            # puts "Before New Array: #{new_arr}" 
+            puts "Before New Array: #{new_arr}" 
             if new_arr == new_arr.reverse
                 # puts "New Array: #{new_arr}"    
                 check_arr = new_arr.each{|na| Integer(na) rescue nil}
-                # puts "Check Array: #{check_arr}"    
+                puts "Check Array: #{check_arr}"    
                 if check_arr.compact.count == 3
                     # byebug
                     return new_arr

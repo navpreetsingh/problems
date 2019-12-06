@@ -1,0 +1,36 @@
+# Run the application with Docker
+**Docker** is the container based service, which makes it easy for any application to scale up to large extent by managing server clusters in swarm stack making it extremely easy to scale up and scale down application as per the usage of the application.
+
+### How to start the application with Docker
+1. Install Docker using a [script](https://github.com/docker/docker-install)
+'''
+curl -fsSL https://get.docker.com -o get-docker.sh
+sh get-docker.sh
+'''
+2. Download the [docker-compose.yml.sample](https://bitbucket.org/navpreet_singh_21/docker-micro-services-spa/src/master/docker-compose.yml) file
+3. Change the name of the file from docker-compose.yml.sample to docker-compose.yml
+4. Start the project in Production and your application will be running on 
+'''
+docker stack deploy -c docker-compose.yml drupal
+'''
+
+1. **Single Database** made in *Ruby on Rails*
+2. **Authentication of Users** in [(*Ruby on Rails*](https://bitbucket.org/navpreet_singh_21/docker-micro-services-spa/wiki/Ruby%20On%20Rails), which can be accessed from folder **user_session/***
+3. **Timezones CRUD** in [(*Node.JS*](https://bitbucket.org/navpreet_singh_21/docker-micro-services-spa/wiki/Node%20Js) in framework **Express** using **Typescript**, which can be accessed from folder **timezones/***
+4. **Users CRUD** in [(*Python*](https://bitbucket.org/navpreet_singh_21/docker-micro-services-spa/wiki/Python) in framework **Flask**, which can be accessed from folder **users/***
+5. **User Interface** in [(*Angular 6*](https://bitbucket.org/navpreet_singh_21/docker-micro-services-spa/wiki/Angular%206) in framework **Angular**, which can be accessed from folder **user-interface/*** 
+6. *Test cases* and *API collections* are done in **Postman**. Collections can be accessed from this [link](https://bitbucket.org/navpreet_singh_21/docker-micro-services-spa/wiki/API%20Testing)
+
+### Requirements of Project
+#### Write an application that shows time in different timezones
+    * User must be able to create an account and log in. (If a mobile application, this means that more users can use the app from the same phone).
+    * When logged in, a user can see, edit and delete timezones he entered.
+    * Implement at least three roles with different permission levels: a regular user would only be able to CRUD on their owned records, a user manager would be able to CRUD users, and an admin would be able to CRUD all records and users.
+    * When a timezone is entered, each entry has a Name, Name of the city in timezone, the difference to GMT time.
+    * When displayed, each entry shows the current time in that timezone and the difference between the browser’s time.
+    * Filter by names.
+    * REST API. Make it possible to perform all user actions via the API, including authentication (If a mobile application and you don’t know how to create your own backend you can use Firebase.com or similar services to create the API).
+    * In any case, you should be able to explain how a REST API works and demonstrate that by creating functional tests that use the REST Layer directly. Please be prepared to use REST clients like Postman, cURL, etc. for this purpose.
+    * If it’s a web application, it must be a single-page application. All actions need to be done client side using AJAX, refreshing the page is not acceptable. (If a mobile application, disregard this).
+    * Functional UI/UX design is needed. You are not required to create a unique design, however, do follow best practices to make the project as functional as possible.
+    * Bonus: unit and e2e tests.

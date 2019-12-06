@@ -5,8 +5,9 @@
         'xzx',
         nil
     ]
+    http://tpcg.io/iNzrSe
 =end
-http://tpcg.io/iNzrSe
+
 
 require 'byebug'
 
@@ -35,7 +36,7 @@ def solution(string)
                 loop_2 += 1
                 # If condition 1
                 if hash[s].nil?
-                    if_1 += 1
+                    # if loop_1 += 1
                     hash[s] = [[]]
                 end
                 # Unless Condition 1
@@ -50,7 +51,7 @@ def solution(string)
                 end
                 hash[s].last.push(i)
             end
-            # puts "Hash: #{hash}"
+            puts "Hash: #{hash}"
             deletion = 0
             # Key Value Loop 3
             hash.each do |k,internal_array|
@@ -73,7 +74,7 @@ def solution(string)
             # Loop count can be reduced by storing the elements index which are converted to null
             loop_4 = loop_4 + string.count # O(n) complexity
             string = string.compact
-            # puts "Compact String: #{string}"
+            puts "Compact String: #{string}"
             break if deletion == 0
         end
     end
@@ -91,7 +92,7 @@ array = [
 ]
 
 array.each do |arr|
-    puts "Input: #{arr}\n\n"
+    puts "Input: #{arr}"
     result = solution(arr)
-    puts "\nResult: #{result}\n\n"
+    puts "Result: #{result}\n\n"
 end

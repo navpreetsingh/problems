@@ -76,7 +76,7 @@ class ShortestPath
                 current_key = @pointer[end_point.to_sym]
                 result.push("From #{current_key} take a path to #{end_point}")
                 (1..distance).to_a.each do |d|
-                    result.push("Go to Point: #{current_key}")
+                    result.push("Go to Point: #{current_key}") unless current_key.nil? || current_key == start
                     current_key = @pointer[current_key]
                 end            
                 result.push("Start from point: #{start.to_s}")
@@ -113,7 +113,7 @@ class ShortestPath
 end
 
 def solution(graph, direction_array = nil, distance_index=nil, range_array=[nil,nil])
-    keys = distance_index.map(&:to_sym) || graph.keys
+    keys = (distance_index.nil? || distance_index.empty?) ? graph.keys : distance_index.map(&:to_sym)
     keys.each do |k|
         puts "Key: #{k} \n"
         target = ShortestPath.new(k, graph)
@@ -139,8 +139,8 @@ graph_1 = {
     h: {a: 8, b: 11, g: 1, i: 7},
     i: {c: 2, g: 6, h: 7} 
 }
-
-solution(graph_1,nil,nil)
+solution(graph_1, nil, nil)
+# solution(graph_1,['a','d'],['a'])
 
 
 # GRAPH 2
